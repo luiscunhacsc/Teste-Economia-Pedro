@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Economia A 11.º Ano — Guia Interativo do Pedro</title>
+  <style>
+    :root {
+      --bg: #111827;
+      --bg-2: #0b1120;
+      --card: rgba(255, 255, 255, 0.075);
+      --card-strong: rgba(255, 255, 255, 0.12);
+      --text: #f8fafc;
+      --muted: #cbd5e1;
+      --soft: #94a3b8;
+      --gold: #fbbf24;
+      --blue: #38bdf8;
+      --green: #34d399;
+      --red: #fb7185;
+      --purple: #c084fc;
+      --line: rgba(255, 255, 255, 0.16);
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(56, 189, 248, 0.22), transparent 32%),
+        radial-gradient(circle at 90% 5%, rgba(251, 191, 36, 0.18), transparent 30%),
+        radial-gradient(circle at 70% 80%, rgba(192, 132, 252, 0.18), transparent 35%),
+        linear-gradient(135deg, var(--bg), var(--bg-2));
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .shell {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: rgba(11, 17, 32, 0.78);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-badge {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--gold), #f97316);
+      box-shadow: 0 12px 30px rgba(251, 191, 36, 0.24);
+      color: #111827;
+      font-size: 22px;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .btn {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-weight: 750;
+      cursor: pointer;
+      transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      background: rgba(255, 255, 255, 0.13);
+      border-color: rgba(255, 255, 255, 0.28);
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, var(--blue), #2563eb);
+      color: white;
+      border: none;
+    }
+
+    .hero {
+      padding: 72px 0 36px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 26px;
+      align-items: stretch;
+    }
+
+    .hero-card, .side-card, .glass {
+      border: 1px solid var(--line);
+      background: linear-gradient(145deg, rgba(255,255,255,0.12), rgba(255,255,255,0.05));
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-card {
+      padding: 42px;
+      position: relative;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -120px auto;
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle, rgba(251,191,36,0.35), transparent 70%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #111827;
+      background: var(--gold);
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-weight: 900;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    h1 {
+      font-size: clamp(2.6rem, 6vw, 5.8rem);
+      line-height: 0.95;
+      letter-spacing: -0.07em;
+      margin: 22px 0 18px;
+    }
+
+    .hero p {
+      font-size: clamp(1.05rem, 2vw, 1.35rem);
+      color: var(--muted);
+      max-width: 780px;
+    }
+
+    .hero-highlight {
+      color: var(--gold);
+    }
+
+    .side-card {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 22px;
+    }
+
+    .score-ring {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      margin: 0 auto;
+      display: grid;
+      place-items: center;
+      background:
+        conic-gradient(var(--green) var(--progress, 0%), rgba(255,255,255,0.12) 0),
+        radial-gradient(circle, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
+      position: relative;
+    }
+
+    .score-ring::after {
+      content: "";
+      position: absolute;
+      inset: 16px;
+      border-radius: 50%;
+      background: #101827;
+      border: 1px solid var(--line);
+    }
+
+    .score-ring span {
+      position: relative;
+      z-index: 1;
+      font-size: 2rem;
+      font-weight: 950;
+    }
+
+    .search-wrap {
+      margin: 22px 0 10px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+    }
+
+    .search-wrap input {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 14px 18px;
+      background: rgba(255,255,255,0.08);
+      color: var(--text);
+      font-size: 1rem;
+      outline: none;
+    }
+
+    .search-wrap input::placeholder { color: var(--soft); }
+
+    .chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .chip {
+      border: 1px solid var(--line);
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 7px 10px;
+      cursor: pointer;
+      background: rgba(255,255,255,0.055);
+      font-size: 0.9rem;
+    }
+
+    .chip:hover, .chip.active { color: white; border-color: var(--blue); background: rgba(56,189,248,0.16); }
+
+    .section-title {
+      margin: 42px 0 18px;
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-size: clamp(1.8rem, 3vw, 3rem);
+      letter-spacing: -0.04em;
+    }
+
+    .section-title p {
+      color: var(--soft);
+      margin: 0;
+      max-width: 520px;
+    }
+
+    .map-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .map-card {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.07);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      min-height: 132px;
+      transition: transform 0.15s ease, background 0.15s ease;
+    }
+
+    .map-card:hover {
+      transform: translateY(-3px);
+      background: rgba(255,255,255,0.12);
+    }
+
+    .map-card strong {
+      display: block;
+      font-size: 1.05rem;
+      margin-bottom: 6px;
+    }
+
+    .map-card span { color: var(--muted); font-size: 0.92rem; }
+
+    .learning-path {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .path-card {
+      padding: 22px;
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.075);
+    }
+
+    .path-number {
+      width: 44px;
+      height: 44px;
+      border-radius: 15px;
+      display: grid;
+      place-items: center;
+      font-weight: 950;
+      color: #111827;
+      background: var(--gold);
+      margin-bottom: 14px;
+    }
+
+    .content-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .toc {
+      position: sticky;
+      top: 78px;
+      max-height: calc(100vh - 96px);
+      overflow: auto;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      background: rgba(255,255,255,0.06);
+      padding: 14px;
+    }
+
+    .toc h3 { margin: 8px 10px 10px; }
+
+    .toc a {
+      display: block;
+      padding: 9px 10px;
+      border-radius: 12px;
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    .toc a:hover { background: rgba(255,255,255,0.09); color: white; }
+
+    .concept {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.075);
+      border-radius: var(--radius-xl);
+      padding: 0;
+      margin-bottom: 18px;
+      overflow: hidden;
+    }
+
+    .concept-header {
+      padding: 22px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .concept-header:hover { background: rgba(255,255,255,0.06); }
+
+    .icon {
+      width: 54px;
+      height: 54px;
+      flex: 0 0 54px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      font-size: 28px;
+      background: rgba(251,191,36,0.18);
+      border: 1px solid rgba(251,191,36,0.28);
+    }
+
+    .concept h3 {
+      margin: 0;
+      font-size: 1.32rem;
+      letter-spacing: -0.02em;
+    }
+
+    .concept .mini {
+      margin: 4px 0 0;
+      color: var(--soft);
+    }
+
+    .toggle {
+      margin-left: auto;
+      font-size: 1.6rem;
+      color: var(--gold);
+    }
+
+    .concept-body {
+      display: none;
+      padding: 0 22px 22px 90px;
+      color: var(--muted);
+    }
+
+    .concept.open .concept-body { display: block; }
+
+    .concept-body h4 {
+      color: var(--text);
+      margin: 20px 0 8px;
+      font-size: 1.05rem;
+    }
+
+    .concept-body ul { margin-top: 8px; padding-left: 20px; }
+
+    .formula {
+      margin: 14px 0;
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(56,189,248,0.32);
+      background: rgba(56,189,248,0.11);
+      color: #e0f2fe;
+      font-weight: 800;
+    }
+
+    .memory-box, .trap-box, .answer-box {
+      margin: 14px 0;
+      border-radius: 18px;
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.06);
+    }
+
+    .memory-box strong { color: var(--green); }
+    .trap-box strong { color: var(--red); }
+    .answer-box strong { color: var(--gold); }
+
+    .two-cols {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .mini-card {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.055);
+      border-radius: 18px;
+      padding: 14px;
+    }
+
+    .quiz-zone {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin: 18px 0 52px;
+    }
+
+    .quiz-card {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.075);
+      border-radius: var(--radius-xl);
+      padding: 24px;
+    }
+
+    .quiz-options {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .option {
+      text-align: left;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      border-radius: 16px;
+      padding: 12px 14px;
+      cursor: pointer;
+      font-weight: 650;
+    }
+
+    .option.correct { border-color: rgba(52,211,153,0.9); background: rgba(52,211,153,0.16); }
+    .option.wrong { border-color: rgba(251,113,133,0.9); background: rgba(251,113,133,0.14); }
+
+    .feedback {
+      margin-top: 14px;
+      color: var(--muted);
+      min-height: 48px;
+    }
+
+    .flashcards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 48px;
+    }
+
+    .flashcard {
+      min-height: 160px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    .flash-inner {
+      position: relative;
+      width: 100%;
+      min-height: 160px;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+
+    .flashcard.flipped .flash-inner { transform: rotateY(180deg); }
+
+    .flash-face {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 18px;
+      background: rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-weight: 850;
+    }
+
+    .flash-back {
+      transform: rotateY(180deg);
+      color: var(--muted);
+      font-weight: 650;
+    }
+
+    .exam-routine {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      background: linear-gradient(135deg, rgba(251,191,36,0.14), rgba(56,189,248,0.10));
+      margin-bottom: 60px;
+    }
+
+    .routine-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .routine-step {
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,0.16);
+      border-radius: 18px;
+      padding: 14px;
+    }
+
+    .checklist {
+      display: grid;
+      gap: 8px;
+    }
+
+    .checklist label {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255,255,255,0.055);
+      cursor: pointer;
+    }
+
+    .hidden { display: none !important; }
+
+    mark {
+      background: rgba(251,191,36,0.4);
+      color: white;
+      padding: 0 3px;
+      border-radius: 4px;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 30px 0 44px;
+      color: var(--soft);
+      text-align: center;
+    }
+
+    @media (max-width: 960px) {
+      .hero-grid, .content-layout, .quiz-zone, .learning-path { grid-template-columns: 1fr; }
+      .toc { position: static; max-height: unset; }
+      .map-grid { grid-template-columns: repeat(2, 1fr); }
+      .flashcards { grid-template-columns: repeat(2, 1fr); }
+      .routine-grid { grid-template-columns: repeat(2, 1fr); }
+      .concept-body { padding-left: 22px; }
+      .hero-card { padding: 28px; }
+    }
+
+    @media (max-width: 640px) {
+      .map-grid, .flashcards, .two-cols, .routine-grid { grid-template-columns: 1fr; }
+      .search-wrap { grid-template-columns: 1fr; }
+      .topbar-inner { align-items: flex-start; flex-direction: column; }
+      .nav-actions { justify-content: flex-start; }
+      .concept-header { align-items: flex-start; }
+      .icon { width: 46px; height: 46px; flex-basis: 46px; }
+    }
+
+    @media print {
+      body { background: white; color: #111827; }
+      .topbar, .hero, .toc, .quiz-zone, .flashcards, footer { display: none; }
+      .content-layout { display: block; }
+      .concept { break-inside: avoid; background: white; border: 1px solid #ddd; }
+      .concept-body { display: block !important; color: #111827; padding: 0 22px 22px; }
+      .concept-header { color: #111827; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <a class="brand" href="#top" aria-label="Início">
+        <span class="brand-badge">📈</span>
+        <span>Economia A · Guia do Pedro</span>
+      </a>
+      <div class="nav-actions">
+        <button class="btn" id="expandAll">Abrir tudo</button>
+        <button class="btn" id="collapseAll">Fechar tudo</button>
+        <button class="btn primary" onclick="window.print()">Imprimir resumo</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero shell">
+      <div class="hero-grid">
+        <div class="hero-card">
+          <span class="eyebrow">🚀 Modo exame · 11.º ano</span>
+          <h1>Economia A sem pânico, Pedro.</h1>
+          <p>
+            Este sítio transforma os conceitos dos testes num mapa visual: ideias curtas, exemplos concretos,
+            armadilhas típicas e frases-modelo para responder como se espera num exame.
+          </p>
+          <p>
+            A lógica é simples: <strong class="hero-highlight">perceber as setas</strong> — se isto aumenta,
+            o que acontece àquilo? Depois, aplicar a linguagem certa.
+          </p>
+          <div class="search-wrap">
+            <input id="searchInput" type="search" placeholder="Pesquisar: inflação, PIB, procura, UE, moeda..." />
+            <button class="btn primary" id="clearSearch">Limpar</button>
+          </div>
+          <div class="chips" aria-label="Filtros rápidos">
+            <button class="chip" data-filter="mercado">Mercados</button>
+            <button class="chip" data-filter="estado">Estado</button>
+            <button class="chip" data-filter="moeda">Moeda</button>
+            <button class="chip" data-filter="familias">Famílias</button>
+            <button class="chip" data-filter="externo">Comércio externo</button>
+            <button class="chip" data-filter="ue">União Europeia</button>
+          </div>
+        </div>
+
+        <aside class="side-card">
+          <div>
+            <h2 style="margin-top:0">Progresso de revisão</h2>
+            <p style="color:var(--muted)">Marca os conceitos dominados. O objetivo não é decorar tudo: é tornar cada ideia familiar.</p>
+          </div>
+          <div class="score-ring" id="scoreRing"><span id="progressText">0%</span></div>
+          <div class="checklist" id="masterChecklist"></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="shell">
+      <div class="section-title">
+        <div>
+          <h2>O mapa mental</h2>
+          <p>Quatro grandes blocos para o cérebro organizar a matéria sem sobrecarga.</p>
+        </div>
+      </div>
+      <div class="map-grid">
+        <a class="map-card" href="#familias"><strong>👨‍👩‍👦 Famílias</strong><span>consumo, poupança, rendimento disponível, Lei de Engel.</span></a>
+        <a class="map-card" href="#empresas"><strong>🏭 Empresas</strong><span>produção, custos, produtividade, investimento.</span></a>
+        <a class="map-card" href="#mercados"><strong>⚖️ Mercados</strong><span>procura, oferta, equilíbrio e estruturas de mercado.</span></a>
+        <a class="map-card" href="#macro"><strong>🌍 Macro</strong><span>PIB, inflação, Estado, UE, comércio externo.</span></a>
+      </div>
+    </section>
+
+    <section class="shell">
+      <div class="section-title">
+        <div>
+          <h2>Como estudar isto</h2>
+          <p>O plano usa princípios de psicologia cognitiva: dividir, praticar, recuperar da memória e evitar confusões.</p>
+        </div>
+      </div>
+      <div class="learning-path">
+        <article class="path-card">
+          <div class="path-number">1</div>
+          <h3>Primeiro: compreender</h3>
+          <p>Lê cada cartão e tenta explicar em voz alta com um exemplo teu. O cérebro aprende melhor quando transforma a ideia.</p>
+        </article>
+        <article class="path-card">
+          <div class="path-number">2</div>
+          <h3>Depois: testar</h3>
+          <p>Usa os mini-quizzes e flashcards. Não esperes “saber tudo” para testar: testar é estudar.</p>
+        </article>
+        <article class="path-card">
+          <div class="path-number">3</div>
+          <h3>No fim: escrever</h3>
+          <p>Treina as frases-modelo. Nos itens abertos, a clareza e a terminologia económica contam muito.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="shell" style="margin-top:46px">
+      <div class="content-layout">
+        <nav class="toc" aria-label="Índice">
+          <h3>Índice rápido</h3>
+          <a href="#problema">1. Problema económico</a>
+          <a href="#agentes">2. Agentes económicos</a>
+          <a href="#consumo">3. Consumo</a>
+          <a href="#investimento">4. Investimento</a>
+          <a href="#capital">5. Capital fixo/circulante</a>
+          <a href="#producao">6. Produção e produtividade</a>
+          <a href="#custos">7. Custos e escala</a>
+          <a href="#engel">8. Lei de Engel</a>
+          <a href="#procuraoferta">9. Procura, oferta e equilíbrio</a>
+          <a href="#deslocacoes">10. Deslocações das curvas</a>
+          <a href="#estruturas">11. Estruturas de mercado</a>
+          <a href="#moeda">12. Moeda</a>
+          <a href="#inflacao">13. Inflação e poder de compra</a>
+          <a href="#nominalreal">14. Nominal e real</a>
+          <a href="#rendimento">15. Rendimento disponível</a>
+          <a href="#trabalho">16. Mercado de trabalho</a>
+          <a href="#pib">17. PIB e VAB</a>
+          <a href="#setores">18. Setores de atividade</a>
+          <a href="#estado">19. Estado e orçamento</a>
+          <a href="#externalidades">20. Externalidades</a>
+          <a href="#pobreza">21. Pobreza e transferências</a>
+          <a href="#ue">22. União Europeia</a>
+          <a href="#bce">23. BCE</a>
+          <a href="#comercio">24. Comércio externo</a>
+          <a href="#balanca">25. Balança corrente/capital</a>
+          <a href="#cambios">26. Taxas de câmbio</a>
+          <a href="#convergencia">27. Convergência real</a>
+          <a href="#graficos">28. Ler gráficos</a>
+          <a href="#frases">29. Frases-modelo</a>
+          <a href="#vespera">30. Véspera</a>
+          <a href="#estrategia">31. Estratégia de teste</a>
+        </nav>
+
+        <div id="concepts">
+          <article class="concept open" id="problema" data-tags="familias empresas mercado macro escolha escassez custo oportunidade">
+            <div class="concept-header">
+              <div class="icon">🧭</div>
+              <div><h3>1. O problema económico</h3><p class="mini">Economia é escolher bem quando os recursos não chegam para tudo.</p></div>
+              <div class="toggle">−</div>
+            </div>
+            <div class="concept-body">
+              <p>A Economia parte de uma ideia muito simples: as necessidades humanas são muitas, mas os recursos são limitados. Por isso, pessoas, empresas e Estados têm de escolher.</p>
+              <h4>Necessidades</h4>
+              <p>São aquilo que queremos satisfazer: alimentação, habitação, saúde, educação, transporte, lazer, segurança.</p>
+              <h4>Recursos escassos</h4>
+              <p>São os meios disponíveis: dinheiro, tempo, trabalho, terra, matérias-primas, máquinas, energia e tecnologia.</p>
+              <h4>Custo de oportunidade</h4>
+              <p>É o valor da melhor alternativa sacrificada quando se escolhe uma opção.</p>
+              <div class="memory-box"><strong>Exemplo para o Pedro:</strong> se escolhes gastar 20 € no cinema e deixas de comprar um livro, o custo de oportunidade do cinema é o livro de que abdicaste.</div>
+              <div class="answer-box"><strong>Frase de exame:</strong> “O custo de oportunidade corresponde ao valor da melhor alternativa sacrificada quando se realiza uma escolha num contexto de recursos escassos.”</div>
+            </div>
+          </article>
+
+          <article class="concept" id="agentes" data-tags="familias empresas estado administrações públicas instituições financeiras resto mundo agentes">
+            <div class="concept-header">
+              <div class="icon">👥</div>
+              <div><h3>2. Agentes económicos</h3><p class="mini">Quem participa na economia e que papel desempenha.</p></div>
+              <div class="toggle">+</div>
+            </div>
+            <div class="concept-body">
+              <div class="two-cols">
+                <div class="mini-card"><h4>Famílias</h4><p>Consomem, poupam, fornecem trabalho e recebem rendimentos como salários, rendas, juros e lucros.</p></div>
+                <div class="mini-card"><h4>Empresas não financeiras</h4><p>Produzem bens e serviços não financeiros: alimentos, roupa, transportes, tecnologia, construção.</p></div>
+                <div class="mini-card"><h4>Instituições financeiras</h4><p>Bancos, seguradoras e outras instituições que captam poupanças, concedem crédito ou cobrem riscos.</p></div>
+                <div class="mini-card"><h4>Administrações públicas</h4><p>Estado, autarquias e organismos públicos. Cobram impostos, pagam salários, atribuem prestações e prestam serviços coletivos.</p></div>
+              </div>
+              <h4>Resto do mundo</h4>
+              <p>Representa as relações com outros países: importações, exportações, turismo, remessas, empréstimos e investimento externo.</p>
+              <div class="trap-box"><strong>Armadilha:</strong> uma seguradora é uma instituição financeira; uma refinaria ou fábrica é empresa não financeira.</div>
+            </div>
+          </article>
+
+          <article class="concept" id="consumo" data-tags="familias consumo final intermédio público privado individual coletivo">
+            <div class="concept-header">
+              <div class="icon">🛒</div>
+              <div><h3>3. Consumo</h3><p class="mini">O truque é perceber quem usa o bem e para quê.</p></div>
+              <div class="toggle">+</div>
+            </div>
+            <div class="concept-body">
+              <h4>Consumo final</h4>
+              <p>Uso de bens ou serviços para satisfazer diretamente necessidades. Exemplo: uma família compra pão, bilhetes de avião ou tintas para pintar a própria casa.</p>
+              <h4>Consumo intermédio</h4>
+              <p>Uso de bens ou serviços no processo produtivo para produzir outros bens. Exemplo: uma fábrica usa leite para fazer queijo; uma empresa têxtil usa linhas e tecidos para fazer roupa.</p>
+              <h4>Consumo privado e público</h4>
+              <p><strong>Privado:</strong> feito pelas famílias. <strong>Público:</strong> feito pelas administrações públicas para prestar serviços públicos.</p>
+              <h4>Consumo individual e coletivo</h4>
+              <p><strong>Individual:</strong> beneficia diretamente uma pessoa ou família. <strong>Coletivo:</strong> beneficia a comunidade, como segurança pública ou iluminação pública.</p>
+              <div class="memory-box"><strong>Pergunta-chave:</strong> “Isto satisfaz diretamente uma necessidade ou serve para produzir outra coisa?”</div>
+            </div>
+          </article>
+
+          <article class="concept" id="investimento" data-tags="empresas investimento consumo capital máquinas equipamentos formação bruta capital">
+            <div class="concept-header">
+              <div class="icon">🏗️</div>
+              <div><h3>4. Investimento</h3><p class="mini">Em Economia, investimento não é apenas “meter dinheiro”.</p></div>
+              <div class="toggle">+</div>
+            </div>
+            <div class="concept-body">
+              <p>Investimento é a aquisição de bens de produção que mantêm ou aumentam a capacidade produtiva.</p>
+              <h4>Exemplos certos</h4>
+              <ul>
+                <li>Uma empresa compra máquinas novas.</li>
+                <li>Um hospital compra equipamentos de radiologia.</li>
+                <li>Uma empresa constrói uma nova fábrica.</li>
+                <li>Uma empresa adquire equipamentos para linhas de montagem.</li>
+              </ul>
+              <h4>Exemplos que confundem</h4>
+              <ul>
+                <li>Família compra carro para uso pessoal: consumo final.</li>
+                <li>Pessoa põe dinheiro num depósito à ordem: poupança/aplicação financeira, não investimento produtivo.</li>
+                <li>Empresa paga juros: despesa financeira, não investimento.</li>
+              </ul>
+              <div class="trap-box"><strong>Armadilha:</strong> “investir dinheiro” no dia a dia nem sempre é “investimento” em Contabilidade Nacional.</div>
+            </div>
+          </article>
+
+          <article class="concept" id="capital" data-tags="empresas capital fixo circulante produção matérias-primas equipamentos">
+            <div class="concept-header">
+              <div class="icon">⚙️</div>
+              <div><h3>5. Capital fixo e capital circulante</h3><p class="mini">Dura vários ciclos ou desaparece no processo produtivo?</p></div>
+              <div class="toggle">+</div>
+            </div>
+            <div class="concept-body">
+              <div class="two-cols">
+                <div class="mini-card"><h4>Capital fixo</h4><p>Bens usados durante vários ciclos produtivos: máquinas, edifícios, equipamentos, veículos de produção.</p></div>
+                <div class="mini-card"><h4>Capital circulante</h4><p>Bens consumidos ou transformados durante a produção: matérias-primas, energia, combustível, componentes.</p></div>
+              </div>
+              <div class="memory-box"><strong>Truque:</strong> dura muito tempo? Capital fixo. É gasto, incorporado ou transformado depressa? Capital circulante.</div>
+            </div>
+          </article>
+
+          <article class="concept" id="producao" data-tags="empresas produção produtividade produtividade média marginal VAB trabalho rendimentos decrescentes">
+            <div class="concept-header">
+              <div class="icon">🏭</div>
+              <div><h3>6. Produção e produtividade</h3><p class="mini">Produzir mais não é o mesmo que produzir melhor.</p></div>
+              <div class="toggle">+</div>
+            </div>
+            <div class="concept-body">
+              <p>Produção é a criação de bens e serviços. Produtividade mede a eficiência com que os fatores produtivos são usados.</p>
+              <div class="formula">Produtividade média do trabalho = Produção / Trabalho utilizado</div>
+              <div class="formula">Produtividade média do trabalho = VAB / População empregada</div>
+              <h4>Produtividade marginal</h4>
+              <p>Mede o acréscimo de produção obtido quando se usa mais uma unidade de fator produtivo.</p>
+              <div class="formula">Produtividade marginal = Variação da produção / Variação do número de trabalhadores</div>
+              <h4>Lei dos rendimentos marginais decrescentes</h4>
+              <p>A partir de certo ponto, se se aumentar apenas um fator produtivo e os outros ficarem fixos, cada nova unidade acrescenta cada vez menos produção.</p>
+              <div class="memory-box"><strong>Imagem mental:</strong> numa cozinha pequena, o 1.º cozinheiro ajuda muito; o 6.º começa a atrapalhar.</div>
+            </div>
+          </article>
+
+          <article class="concept" id="custos" data-tags="empresas custos custo médio economias escala deseconomias rendimentos constantes">
+            <div class="concept-header">
+              <div class="icon">📉</div>
+              <div><h3>7. Custos e escala</h3><p class="mini">O segredo é comparar custo total com quantidade produzida.</p></div>
+              <div class="toggle">+</div>
+            </div>
+            <div class="concept-body">
+              <div class="formula">Custo médio = Custo total / Quantidade produzida</div>
+              <h4>Economias de escala</h4>
+              <p>A empresa aumenta a produção e o custo médio diminui. A quantidade produzida cresce mais do que o custo total.</p>
+              <h4>Deseconomias de escala</h4>
+              <p>A empresa aumenta a produção, mas o custo total aumenta ainda mais. O custo médio sobe.</p>
+              <h4>Rendimentos constantes à escala</h4>
+              <p>Produção e custo total aumentam na mesma proporção. O custo médio mantém-se.</p>
+              <div class="memory-box"><strong>Teste rápido:</strong> produção +20% e custo +10% = economias de escala. Produção +10% e custo +20% = deseconomias.</div>
+            </div>
+          </article>
+
+          <article class="concept" id="engel" data-tags="familias lei engel coeficientes orçamentais rendimento alimentação consumo">
+            <div class="concept-header">
+              <div class="icon">🍞</div>
+              <div><h3>8. Lei de Engel e coeficientes orçamentais</h3><p class="mini">Quanto maior o rendimento, menor tende a ser a fatia da alimentação.</p></div>
+              <div class="toggle">+</div>
+            </div>
+            <div class="concept-body">
+              <h4>Coeficiente orçamental</h4>
+              <p>É a percentagem da despesa total em consumo gasta numa categoria.</p>
+              <div class="formula">Coeficiente orçamental = Despesa nessa categoria / Despesa total em consumo × 100</div>
+              <h4>Lei de Engel</h4>
+              <p>Quando o rendimento aumenta, a percentagem da despesa em consumo dedicada à alimentação tende a diminuir.</p>
+              <div class="trap-box"><strong>Atenção:</strong> a família pode gastar mais euros em alimentação, mas essa despesa representar uma percentagem menor do consumo total.</div>
+              <div class="memory-box"><strong>Imagem mental:</strong> quem tem pouco rendimento gasta grande parte em comida; quem tem mais rendimento consegue gastar proporcionalmente mais em lazer, educação, tecnologia e cultura.</div>
+            </div>
+          </article>
+
+          <article class="concept" id="procuraoferta" data-tags="mercado procura oferta equilíbrio preço quantidade excesso procura oferta">
+            <div class="concept-header">
+              <div class="icon">⚖️</div>
+              <div><h3>9. Procura, oferta e equilíbrio</h3><p class="mini">O mercado é uma balança entre compradores e vendedores.</p></div>
+              <div class="toggle">+</div>
+            </div>
+            <div class="concept-body">
+              <h4>Procura</h4>
+              <p>Mostra a quantidade que os consumidores querem comprar a cada preço. Regra geral: preço sobe → quantidade procurada desce.</p>
+              <h4>Oferta</h4>
+              <p>Mostra a quantidade que os produtores querem vender a cada preço. Regra geral: preço sobe → quantidade oferecida sobe.</p>
+              <h4>Equilíbrio</h4>
+              <p>Acontece quando quantidade procurada = quantidade oferecida.</p>
+              <h4>Excesso de procura</h4>
+              <p>Quantidade procurada maior do que quantidade oferecida. Há pressão para subida do preço.</p>
+              <h4>Excesso de oferta</h4>
+              <p>Quantidade oferecida maior do que quantidade procurada. Há pressão para descida do preço.</p>
+              <div class="answer-box"><strong>Frase de exame:</strong> “O excesso de procura gera pressão para a subida do preço; o excesso de oferta gera pressão para a descida do preço.”</div>
+            </div>
+          </article>
+
+          <article class="concept" id="deslocacoes" data-tags="mercado procura oferta bens complementares substitutos rendimento gostos deslocação curva">
+            <div class="concept-header">
+              <div class="icon">↔️</div>
+              <div><h3>10. Deslocações da procura e da oferta</h3><p class="mini">Não confundas movimento na curva com deslocação da curva.</p></div>
+              <div class="toggle">+</div>
+            </div>
+            <div class="concept-body">
+              <h4>Movimento ao longo da curva</h4>
+              <p>Acontece quando muda o preço do próprio bem. Exemplo: preço das raquetes sobe → quantidade procurada de raquetes desce.</p>
+              <h4>Deslocação da procura</h4>
+              <p>Acontece quando muda outro fator: rendimento, gostos, preço de bens complementares ou substitutos, expectativas.</p>
+              <h4>Bens complementares</h4>
+              <p>São usados em conjunto: raquetes e bolas de ténis; carros e combustível. Se o preço de um sobe, a procura do complementar tende a diminuir.</p>
+              <h4>Bens substitutos</h4>
+              <p>Podem substituir-se: manteiga e margarina; comboio e autocarro. Se o preço de um sobe, a procura do substituto tende a aumentar.</p>
+              <div class="trap-box"><strong>Armadilha:</strong> preço do próprio bem muda a quantidade procurada; outros fatores mudam a procura.</div>
+            </div>
+          </article>
+
+          <article class="concept" id="estruturas" data-tags="mercado concorrência perfeita monopolística oligopólio monopólio vendedores consumidores preço">
+            <div class="concept-header">
+              <div class="icon">🏟️</div>
+              <div><h3>11. Estruturas de mercado</h3><p class="mini">Quantos vendedores existem e quanto poder têm sobre o preço?</p></div>
+              <div class="toggle">+</div>
+            </div>
+            <div class="concept-body">
+              <div class="two-cols">
+                <div class="mini-card"><h4>Concorrência perfeita</h4><p>Muitos vendedores, muitos compradores, produto homogéneo, empresas sem poder sobre o preço.</p></div>
+                <div class="mini-card"><h4>Concorrência monopolística</h4><p>Muitos vendedores, muitos compradores, produtos diferenciados, algum poder sobre o preço.</p></div>
+                <div class="mini-card"><h4>Oligopólio</h4><p>Poucos vendedores, cada um com capacidade de influenciar o preço.</p></div>
+                <div class="mini-card"><h4>Monopólio</h4><p>Um só vendedor domina o mercado.</p></div>
+              </div>
+              <div class="memory-box"><strong>Truque:</strong> perfeita e monopolística têm em comum muitos vendedores e muitos consumidores. A diferença: produto homogéneo vs diferenciado.</div>
+              <div class="answer-box"><strong>Exemplo clássico:</strong> trigo em concorrência perfeita. Se o produtor tentar vender mais caro, os clientes compram aos outros produtores.</div>
+            </div>
+          </article>
+
+          <article class="concept" id="moeda" data-tags="moeda papel moeda escritural fiduciária banco central bancos comerciais pagamento valor reserva">
+            <div class="concept-header">
+              <div class="icon">💶</div>
+              <div><h3>12. Moeda</h3><p class="mini">A moeda compra, mede valor e guarda poder de compra.</p></div>
+              <div class="toggle">+</div>
+            </div>
+            <div class="concept-body">
+              <h4>Funções da moeda</h4>
+              <ul>
+                <li><strong>Meio de pagamento / instrumento de troca:</strong> serve para comprar bens e serviços.</li>
+                <li><strong>Unidade de medida de valor:</strong> permite comparar preços.</li>
+                <li><strong>Reserva de valor:</strong> permite guardar poder de compra para o futuro.</li>
+              </ul>
+              <h4>Tipos de moeda</h4>
+              <p><strong>Papel-moeda:</strong> notas emitidas pelo banco central.</p>
+              <p><strong>Moeda escritural:</strong> depósitos bancários à ordem movimentados por cartões, transferências ou cheques.</p>
+              <div class="memory-box"><strong>Frase típica:</strong> o banco central emite papel-moeda; os bancos comerciais permitem pagamentos através de moeda escritural.</div>
+            </div>
+          </article>
+
+          <article class="concept" id="inflacao" data-tags="moeda inflação IPC deflação desinflação valor real poder compra preços">
+            <div class="concept-header">
+              <div class="icon">🎈</div>
+              <div><h3>13. Inflação, IPC e poder de compra</h3><p class="mini">Quando os preços sobem, o dinheiro perde força.</p></div>
+              <div class="toggle">+</div>
+            </div>
+            <div class="concept-body">
+              <h4>IPC</h4>
+              <p>O Índice de Preços no Consumidor mede a evolução do nível médio dos preços de um cabaz de bens e serviços consumidos pelas famílias.</p>
+              <h4>Inflação</h4>
+              <p>Aumento do nível médio de preços.</p>
+              <h4>Deflação</h4>
+              <p>Diminuição do nível médio de preços.</p>
+              <h4>Desinflação</h4>
+              <p>Os preços continuam a subir, mas a um ritmo menor.</p>
+              <h4>Poder de compra</h4>
+              <p>Quantidade de bens e serviços que se consegue comprar com o rendimento.</p>
+              <div class="trap-box"><strong>Armadilha:</strong> inflação de 8% para 5% não significa que preços baixaram; significa que subiram mais devagar.</div>
+              <div class="answer-box"><strong>Frase de exame:</strong> “O aumento do nível médio de preços reduz o valor real da moeda; se o rendimento nominal não acompanhar esse aumento, o poder de compra diminui.”</div>
+            </div>
+          </article>
+
+          <article class="concept" id="nominalreal" data-tags="macro nominal real preços correntes constantes inflação PIB rendimento">
+            <div class="concept-header">
+              <div class="icon">🎭</div>
+              <div><h3>14. Valores nominais e reais</h3><p class="mini">Nominal é antes de retirar a inflação; real é depois.</p></div>
+              <div class="toggle">+</div>
+            </div>
+            <div class="concept-body">
+              <h4>Valor nominal</h4>
+              <p>Medido a preços correntes, ou seja, aos preços do próprio ano.</p>
+              <h4>Valor real</h4>
+              <p>Medido a preços constantes, retirando o efeito da inflação.</p>
+              <div class="memory-box"><strong>Imagem mental:</strong> nominal = euros à superfície; real = euros depois de tirar a máscara da inflação.</div>
+              <div class="trap-box"><strong>Atenção:</strong> se o PIB nominal sobe, pode ser por aumento de preços. Se o PIB real sobe, há aumento da quantidade produzida.</div>
+            </div>
+          </article>
+
+          <article class="concept" id="rendimento" data-tags="familias rendimento disponível consumo poupança transferências impostos contribuições salários">
+            <div class="concept-header">
+              <div class="icon">👛</div>
+              <div><h3>15. Rendimento disponível, consumo e poupança</h3><p class="mini">O rendimento disponível é usado para consumir ou poupar.</p></div>
+              <div class="toggle">+</div>
+            </div>
+            <div class="concept-body">
+              <h4>Rendimento disponível</h4>
+              <p>É o rendimento que as famílias têm para consumir ou poupar depois de impostos e contribuições, incluindo transferências recebidas.</p>
+              <div class="formula">Poupança = Rendimento disponível − Consumo</div>
+              <h4>Rendimentos primários</h4>
+              <p>Salários, rendas, juros e lucros obtidos pela participação no processo produtivo.</p>
+              <h4>Transferências sociais</h4>
+              <p>Pagamentos recebidos sem contrapartida direta: pensões, subsídios, abonos e apoios sociais.</p>
+              <div class="trap-box"><strong>Armadilha:</strong> se a poupança é 20% do rendimento disponível, o consumo é 80%. Os coeficientes orçamentais aplicam-se à despesa em consumo.</div>
+            </div>
+          </article>
+
+          <article class="concept" id="trabalho" data-tags="mercado trabalho população ativa desemprego empregados inativos taxa atividade desemprego">
+            <div class="concept-header">
+              <div class="icon">🧑‍💼</div>
+              <div><h3>16. Mercado de trabalho</h3><p class="mini">Desemprego calcula-se sobre a população ativa, não sobre toda a população.</p></div>
+              <div class="toggle">+</div>
+            </div>
+            <div class="concept-body">
+              <h4>População ativa</h4>
+              <p>Empregados + desempregados que procuram trabalho.</p>
+              <h4>População inativa</h4>
+              <p>Pessoas que não trabalham nem procuram trabalho: estudantes, reformados, domésticos/as, incapazes para trabalhar, etc.</p>
+              <div class="formula">Taxa de atividade = População ativa / População total × 100</div>
+              <div class="formula">Taxa de desemprego = Desempregados / População ativa × 100</div>
+              <div class="formula">População ativa = Empregados / (1 − taxa de desemprego)</div>
+              <div class="trap-box"><strong>Armadilha:</strong> a taxa de desemprego nunca se calcula dividindo desempregados pela população total.</div>
+            </div>
+          </article>
+
+          <article class="concept" id="pib" data-tags="macro PIB VAB contabilidade nacional produção rendimento despesa bem-estar">
+            <div class="concept-header">
+              <div class="icon">🏛️</div>
+              <div><h3>17. PIB, VAB e Contabilidade Nacional</h3><p class="mini">O PIB mede produção final, mas não mede tudo o que importa.</p></div>
+              <div class="toggle">+</div>
+            </div>
+            <div class="concept-body">
+              <h4>PIB</h4>
+              <p>Produto Interno Bruto: valor da produção final realizada dentro do território económico de um país durante um período.</p>
+              <h4>Óticas do PIB</h4>
+              <ul>
+                <li><strong>Ótica da produção:</strong> soma do VAB mais impostos líquidos de subsídios sobre produtos.</li>
+                <li><strong>Ótica do rendimento:</strong> mostra como o valor criado é distribuído por salários, rendas, juros e lucros.</li>
+                <li><strong>Ótica da despesa:</strong> soma das despesas em consumo, investimento, despesa pública e exportações líquidas.</li>
+              </ul>
+              <div class="formula">PIB = Consumo + Investimento + Despesa pública + Exportações − Importações</div>
+              <h4>VAB</h4>
+              <p>Valor Acrescentado Bruto: valor que cada atividade acrescenta à economia.</p>
+              <h4>Limitações do PIB</h4>
+              <p>Não mede bem desigualdade, trabalho doméstico não pago, impactos ambientais, qualidade de vida ou bem-estar psicológico.</p>
+            </div>
+          </article>
+
+          <article class="concept" id="setores" data-tags="setores atividade primário secundário terciário agricultura indústria serviços">
+            <div class="concept-header">
+              <div class="icon">🧱</div>
+              <div><h3>18. Setores de atividade económica</h3><p class="mini">Natureza, transformação e serviços.</p></div>
+              <div class="toggle">+</div>
+            </div>
+            <div class="concept-body">
+              <div class="two-cols">
+                <div class="mini-card"><h4>Setor primário</h4><p>Obtém recursos da natureza: agricultura, pesca, pecuária, silvicultura, extração.</p></div>
+                <div class="mini-card"><h4>Setor secundário</h4><p>Transforma matérias-primas: indústria, construção, produção de tecidos, produção industrial.</p></div>
+                <div class="mini-card"><h4>Setor terciário</h4><p>Presta serviços: comércio, transportes, saúde, educação, turismo, serviços médicos.</p></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="concept" id="estado" data-tags="estado administrações públicas impostos despesas públicas défice dívida orçamento política orçamental fiscal">
+            <div class="concept-header">
+              <div class="icon">🏦</div>
+              <div><h3>19. Estado, orçamento e política económica</h3><p class="mini">Receitas menos despesas: aqui nasce o saldo orçamental.</p></div>
+              <div class="toggle">+</div>
+            </div>
+            <div class="concept-body">
+              <h4>Receitas públicas</h4>
+              <p>Impostos, contribuições sociais, taxas, vendas e transferências recebidas.</p>
+              <h4>Despesas públicas</h4>
+              <p>Salários dos funcionários públicos, prestações sociais, subsídios, investimento público e juros da dívida.</p>
+              <div class="formula">Saldo orçamental = Receitas públicas − Despesas públicas</div>
+              <p>Se receitas > despesas: excedente. Se receitas < despesas: défice.</p>
+              <h4>Dívida pública</h4>
+              <p>Se o Estado financia défices através de empréstimos, a dívida pública aumenta.</p>
+              <h4>Política orçamental / fiscal</h4>
+              <p>Intervenção do Estado através de impostos e despesa pública. Para estimular a economia, pode reduzir impostos ou aumentar despesa. Para reduzir défice, pode aumentar impostos ou reduzir despesa.</p>
+            </div>
+          </article>
+
+          <article class="concept" id="externalidades" data-tags="estado mercado externalidades eficiência económica imposto poluição custo social privado">
+            <div class="concept-header">
+              <div class="icon">🌫️</div>
+              <div><h3>20. Externalidades e eficiência económica</h3><p class="mini">Quando uma decisão privada cria custos para a sociedade.</p></div>
+              <div class="toggle">+</div>
+            </div>
+            <div class="concept-body">
+              <h4>Externalidade negativa</h4>
+              <p>Acontece quando uma atividade causa custos a terceiros que não estão refletidos no preço de mercado.</p>
+              <p>Exemplo: uma fábrica polui. A empresa suporta os custos privados, mas a sociedade suporta custos de saúde e ambientais.</p>
+              <div class="formula">Custo social > Custo privado</div>
+              <h4>Como o Estado pode corrigir?</h4>
+              <p>Pode aplicar um imposto. O imposto aumenta o custo, reduz a quantidade produzida ou consumida e aproxima a economia de uma afetação mais eficiente dos recursos.</p>
+              <div class="answer-box"><strong>Frase de exame:</strong> “O imposto permite internalizar a externalidade negativa, levando os agentes económicos a considerar o custo social da sua decisão.”</div>
+            </div>
+          </article>
+
+          <article class="concept" id="pobreza" data-tags="estado pobreza transferências sociais risco pobreza pensões inclusão social pontos percentuais">
+            <div class="concept-header">
+              <div class="icon">🤝</div>
+              <div><h3>21. Pobreza e transferências sociais</h3><p class="mini">O importante é comparar antes e depois das transferências.</p></div>
+              <div class="toggle">+</div>
+            </div>
+            <div class="concept-body">
+              <h4>Taxa de risco de pobreza antes das transferências</h4>
+              <p>Percentagem da população em risco de pobreza antes dos apoios sociais.</p>
+              <h4>Taxa de risco de pobreza após transferências</h4>
+              <p>Percentagem depois de apoios como pensões, subsídios e prestações sociais.</p>
+              <h4>Contributo das transferências</h4>
+              <p>Mede-se pela diferença, em pontos percentuais, entre a taxa antes e após transferências.</p>
+              <div class="formula">Redução = Taxa antes − Taxa depois</div>
+              <div class="memory-box"><strong>Exemplo:</strong> antes 42,5%; depois 16,4%. Redução = 26,1 pontos percentuais.</div>
+            </div>
+          </article>
+
+          <article class="concept" id="ue" data-tags="ue união europeia integração económica zona comércio livre união aduaneira mercado comum euro croácia">
+            <div class="concept-header">
+              <div class="icon">🇪🇺</div>
+              <div><h3>22. União Europeia e integração económica</h3><p class="mini">Cada etapa acrescenta mais integração.</p></div>
+              <div class="toggle">+</div>
+            </div>
+            <div class="concept-body">
+              <h4>Zona de comércio livre</h4>
+              <p>Elimina barreiras alfandegárias entre países membros, mas cada país mantém a sua política comercial face a países terceiros.</p>
+              <h4>União aduaneira</h4>
+              <p>Há livre circulação de mercadorias entre membros e uma pauta aduaneira exterior comum face a países terceiros.</p>
+              <h4>Mercado comum</h4>
+              <p>Acrescenta livre circulação de bens, serviços, pessoas e capitais.</p>
+              <h4>União económica e monetária</h4>
+              <p>Integração económica mais profunda, incluindo moeda comum para os países da área do euro.</p>
+              <div class="memory-box"><strong>Datas-chave:</strong> Tratado de Roma: 1957. Ato Único Europeu: 1986. Área do euro: 1999. Notas e moedas de euro: 2002. Croácia no euro: 2023.</div>
+              <div class="trap-box"><strong>Armadilha:</strong> união aduaneira não é ainda mercado comum. Mercado comum inclui também pessoas, serviços e capitais.</div>
+            </div>
+          </article>
+
+          <article class="concept" id="bce" data-tags="ue moeda BCE banco central europeu política monetária taxas juro estabilidade preços">
+            <div class="concept-header">
+              <div class="icon">🏦</div>
+              <div><h3>23. BCE e política monetária</h3><p class="mini">O Banco Central Europeu procura estabilidade de preços.</p></div>
+              <div class="toggle">+</div>
+            </div>
+            <div class="concept-body">
+              <p>O BCE conduz a política monetária da área do euro e tem como objetivo principal a estabilidade de preços.</p>
+              <h4>Se a economia está fraca</h4>
+              <p>O BCE pode reduzir taxas de juro. O crédito fica mais barato, o consumo e o investimento podem aumentar, e o PIB pode crescer.</p>
+              <h4>Se a inflação está demasiado alta</h4>
+              <p>O BCE pode aumentar taxas de juro. O crédito fica mais caro, a procura abranda e a inflação pode diminuir.</p>
+              <div class="memory-box"><strong>Seta principal:</strong> taxa de juro ↓ → crédito mais barato → consumo/investimento ↑ → PIB/emprego podem ↑.</div>
+            </div>
+          </article>
+
+          <article class="concept" id="comercio" data-tags="externo comércio externo exportações importações balança bens taxa cobertura saldo">
+            <div class="concept-header">
+              <div class="icon">🚢</div>
+              <div><h3>24. Comércio externo e balança de bens</h3><p class="mini">Exportar é vender ao exterior; importar é comprar ao exterior.</p></div>
+              <div class="toggle">+</div>
+            </div>
+            <div class="concept-body">
+              <h4>Exportações</h4>
+              <p>Bens e serviços vendidos ao resto do mundo.</p>
+              <h4>Importações</h4>
+              <p>Bens e serviços comprados ao resto do mundo.</p>
+              <div class="formula">Saldo da balança de bens = Exportações de bens − Importações de bens</div>
+              <p>Se exportações > importações: superavit. Se exportações < importações: défice.</p>
+              <div class="formula">Taxa de cobertura = Exportações / Importações × 100</div>
+              <p>Acima de 100%: exportações cobrem as importações. Abaixo de 100%: não cobrem.</p>
+            </div>
+          </article>
+
+          <article class="concept" id="balanca" data-tags="externo balança corrente capital crédito débito saldo transferências remessas turismo rendimentos">
+            <div class="concept-header">
+              <div class="icon">🧾</div>
+              <div><h3>25. Balança corrente e de capital</h3><p class="mini">Crédito entra; débito sai.</p></div>
+              <div class="toggle">+</div>
+            </div>
+            <div class="concept-body">
+              <h4>Crédito</h4>
+              <p>Entradas de valor no país: exportações, turismo recebido, remessas de emigrantes, rendimentos recebidos do exterior.</p>
+              <h4>Débito</h4>
+              <p>Saídas de valor: importações, turismo feito no estrangeiro, remessas enviadas para fora, rendimentos pagos ao exterior.</p>
+              <div class="formula">Saldo = Créditos − Débitos</div>
+              <p>Saldo positivo: entrada líquida. Saldo negativo: saída líquida.</p>
+            </div>
+          </article>
+
+          <article class="concept" id="cambios" data-tags="externo câmbio euro dólar exportações importações desvalorização apreciação moeda">
+            <div class="concept-header">
+              <div class="icon">💱</div>
+              <div><h3>26. Taxas de câmbio</h3><p class="mini">Quando o euro muda de valor, exportações e importações reagem.</p></div>
+              <div class="toggle">+</div>
+            </div>
+            <div class="concept-body">
+              <h4>Euro desvaloriza face ao dólar</h4>
+              <ul>
+                <li>Produtos europeus ficam mais baratos para compradores dos EUA.</li>
+                <li>Exportações europeias tendem a aumentar.</li>
+                <li>Produtos dos EUA ficam mais caros para europeus.</li>
+                <li>Importações vindas dos EUA tendem a diminuir.</li>
+              </ul>
+              <h4>Euro valoriza face ao dólar</h4>
+              <ul>
+                <li>Produtos europeus ficam mais caros para compradores dos EUA.</li>
+                <li>Exportações podem diminuir.</li>
+                <li>Produtos dos EUA ficam mais baratos para europeus.</li>
+                <li>Importações podem aumentar.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="concept" id="convergencia" data-tags="macro convergência real PIB habitante UE média desenvolvimento">
+            <div class="concept-header">
+              <div class="icon">🧗</div>
+              <div><h3>27. Convergência real</h3><p class="mini">Aproximar o nível de vida da média de referência.</p></div>
+              <div class="toggle">+</div>
+            </div>
+            <div class="concept-body">
+              <p>A convergência real acontece quando uma economia se aproxima do nível médio de rendimento ou PIB por habitante de uma referência, como a média da União Europeia.</p>
+              <div class="memory-box"><strong>Exemplo:</strong> se UE-27 = 100 e Portugal passa de 78 para 83, aproxima-se da média: há convergência.</div>
+              <div class="trap-box"><strong>Armadilha:</strong> se o indicador se afasta de 100, há divergência, mesmo que o país tenha crescido em termos absolutos.</div>
+            </div>
+          </article>
+
+          <article class="concept" id="graficos" data-tags="gráficos tabelas interpretação percentagem pontos percentuais taxa variação exame">
+            <div class="concept-header">
+              <div class="icon">📊</div>
+              <div><h3>28. Como ler tabelas e gráficos</h3><p class="mini">Antes de calcular, percebe o que está a ser medido.</p></div>
+              <div class="toggle">+</div>
+            </div>
+            <div class="concept-body">
+              <ol>
+                <li><strong>Lê o título:</strong> é sobre preços, rendimento, pobreza, produtividade, comércio externo?</li>
+                <li><strong>Vê a unidade:</strong> euros, milhões, percentagem, pontos percentuais, índice, milhares?</li>
+                <li><strong>Vê o período:</strong> comparação anual, 2023 face a 2022, 2020 face a 2012?</li>
+                <li><strong>Distingue nível e variação:</strong> inflação menor não significa preços menores.</li>
+                <li><strong>Distingue percentagem e pontos percentuais:</strong> de 10% para 15% são +5 pontos percentuais, mas +50% relativamente ao valor inicial.</li>
+              </ol>
+              <div class="memory-box"><strong>Ritual de 20 segundos:</strong> título → unidade → período → nível ou variação → só depois responder.</div>
+            </div>
+          </article>
+
+          <article class="concept" id="frases" data-tags="frases modelo resposta exame aberta escrita terminologia">
+            <div class="concept-header">
+              <div class="icon">✍️</div>
+              <div><h3>29. Frases-modelo para respostas abertas</h3><p class="mini">Usa linguagem económica limpa e direta.</p></div>
+              <div class="toggle">+</div>
+            </div>
+            <div class="concept-body">
+              <div class="answer-box"><strong>Custo de oportunidade:</strong> “Como os recursos são escassos, a escolha de uma alternativa implica abdicar de outra. O custo de oportunidade corresponde ao valor da melhor alternativa sacrificada.”</div>
+              <div class="answer-box"><strong>Inflação:</strong> “O aumento do nível médio de preços reduz o valor real da moeda. Assim, se o rendimento nominal não aumentar na mesma proporção, o poder de compra diminui.”</div>
+              <div class="answer-box"><strong>Transferências sociais:</strong> “As transferências sociais reduzem a taxa de risco de pobreza, pois aumentam o rendimento disponível das famílias mais vulneráveis.”</div>
+              <div class="answer-box"><strong>Externalidade negativa:</strong> “A existência de uma externalidade negativa significa que o custo social é superior ao custo privado. A aplicação de um imposto permite internalizar esse custo.”</div>
+              <div class="answer-box"><strong>Mercado em desequilíbrio:</strong> “Quando a quantidade procurada é superior à quantidade oferecida, existe excesso de procura, gerando pressão para a subida do preço.”</div>
+            </div>
+          </article>
+
+          <article class="concept" id="vespera" data-tags="véspera revisão resumo memorizar exame essencial">
+            <div class="concept-header">
+              <div class="icon">🧠</div>
+              <div><h3>30. O essencial para a véspera</h3><p class="mini">As ideias que o Pedro deve levar bem arrumadas.</p></div>
+              <div class="toggle">+</div>
+            </div>
+            <div class="concept-body">
+              <ul>
+                <li>Economia = escolhas com recursos escassos.</li>
+                <li>Custo de oportunidade = melhor alternativa sacrificada.</li>
+                <li>Consumo final satisfaz diretamente necessidades; consumo intermédio serve para produzir.</li>
+                <li>Investimento económico = compra de bens de produção.</li>
+                <li>Lei de Engel: rendimento aumenta → peso da alimentação tende a diminuir.</li>
+                <li>Procura: preço sobe → quantidade procurada desce.</li>
+                <li>Oferta: preço sobe → quantidade oferecida sobe.</li>
+                <li>Excesso de procura puxa preço para cima; excesso de oferta puxa preço para baixo.</li>
+                <li>Concorrência perfeita: muitos vendedores, muitos compradores, produto homogéneo, preço dado pelo mercado.</li>
+                <li>Inflação reduz o valor real da moeda.</li>
+                <li>Poder de compra aumenta se o rendimento nominal crescer mais do que os preços.</li>
+                <li>Taxa de desemprego = desempregados / população ativa × 100.</li>
+                <li>Saldo orçamental = receitas públicas − despesas públicas.</li>
+                <li>Taxa de cobertura = exportações / importações × 100.</li>
+                <li>União aduaneira tem pauta exterior comum; mercado comum inclui bens, serviços, pessoas e capitais.</li>
+                <li>BCE faz política monetária e procura estabilidade de preços.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="concept" id="estrategia" data-tags="estratégia teste exame resposta escolha múltipla setas causa efeito">
+            <div class="concept-header">
+              <div class="icon">🎯</div>
+              <div><h3>31. Estratégia mental para o teste</h3><p class="mini">Não responder por impulso: identificar, ligar, escrever.</p></div>
+              <div class="toggle">+</div>
+            </div>
+            <div class="concept-body">
+              <ol>
+                <li><strong>Identifica o tema:</strong> consumo, mercado, inflação, Estado, UE ou comércio externo?</li>
+                <li><strong>Procura a palavra-armadilha:</strong> nominal/real, percentagem/pontos percentuais, antes/depois, crédito/débito, procura/quantidade procurada.</li>
+                <li><strong>Aplica a regra simples:</strong> preço sobe, quantidade procurada desce; inflação sobe, valor real da moeda desce.</li>
+                <li><strong>Escolhe ou escreve:</strong> só depois de perceber a seta de causa e efeito.</li>
+              </ol>
+              <div class="memory-box"><strong>Segredo:</strong> muitas perguntas não querem frases decoradas; querem que percebas as relações: se isto muda, aquilo muda como?</div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="shell">
+      <div class="section-title">
+        <div>
+          <h2>Mini-quiz de aquecimento</h2>
+          <p>Responde sem medo. Errar aqui é útil: mostra ao cérebro onde deve prestar atenção.</p>
+        </div>
+      </div>
+      <div class="quiz-zone">
+        <article class="quiz-card" data-answer="b">
+          <h3>1. Se a inflação baixa de 8% para 5%, então...</h3>
+          <div class="quiz-options">
+            <button class="option" data-option="a">Os preços diminuíram.</button>
+            <button class="option" data-option="b">Os preços continuaram a subir, mas mais devagar.</button>
+            <button class="option" data-option="c">O valor real da moeda aumentou sempre.</button>
+          </div>
+          <div class="feedback"></div>
+        </article>
+        <article class="quiz-card" data-answer="c">
+          <h3>2. Em concorrência perfeita, uma empresa individual...</h3>
+          <div class="quiz-options">
+            <button class="option" data-option="a">Define sozinha o preço de mercado.</button>
+            <button class="option" data-option="b">Vende sempre produtos diferenciados.</button>
+            <button class="option" data-option="c">Aceita o preço dado pelo mercado.</button>
+          </div>
+          <div class="feedback"></div>
+        </article>
+        <article class="quiz-card" data-answer="a">
+          <h3>3. A taxa de desemprego calcula-se sobre...</h3>
+          <div class="quiz-options">
+            <button class="option" data-option="a">A população ativa.</button>
+            <button class="option" data-option="b">A população total.</button>
+            <button class="option" data-option="c">A população inativa.</button>
+          </div>
+          <div class="feedback"></div>
+        </article>
+        <article class="quiz-card" data-answer="b">
+          <h3>4. Uma fábrica usa tecido para produzir roupa. Isto é...</h3>
+          <div class="quiz-options">
+            <button class="option" data-option="a">Consumo final.</button>
+            <button class="option" data-option="b">Consumo intermédio.</button>
+            <button class="option" data-option="c">Poupança.</button>
+          </div>
+          <div class="feedback"></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="shell">
+      <div class="section-title">
+        <div>
+          <h2>Flashcards rápidos</h2>
+          <p>Clica para virar. Ideal para revisão ativa antes do teste.</p>
+        </div>
+      </div>
+      <div class="flashcards">
+        <div class="flashcard"><div class="flash-inner"><div class="flash-face">Custo de oportunidade</div><div class="flash-face flash-back">Valor da melhor alternativa sacrificada quando se escolhe.</div></div></div>
+        <div class="flashcard"><div class="flash-inner"><div class="flash-face">Moeda escritural</div><div class="flash-face flash-back">Moeda nos depósitos à ordem, movimentada por cartões, cheques ou transferências.</div></div></div>
+        <div class="flashcard"><div class="flash-inner"><div class="flash-face">Lei de Engel</div><div class="flash-face flash-back">Rendimento aumenta → peso da alimentação no consumo tende a diminuir.</div></div></div>
+        <div class="flashcard"><div class="flash-inner"><div class="flash-face">Excesso de procura</div><div class="flash-face flash-back">Quantidade procurada maior do que quantidade oferecida; preço tende a subir.</div></div></div>
+        <div class="flashcard"><div class="flash-inner"><div class="flash-face">Taxa de cobertura</div><div class="flash-face flash-back">Exportações / Importações × 100.</div></div></div>
+        <div class="flashcard"><div class="flash-inner"><div class="flash-face">Mercado comum</div><div class="flash-face flash-back">Livre circulação de bens, serviços, pessoas e capitais.</div></div></div>
+      </div>
+    </section>
+
+    <section class="shell exam-routine">
+      <h2 style="margin-top:0">Rotina de resposta em 5 passos</h2>
+      <p style="color:var(--muted)">Usa isto em qualquer pergunta com texto, tabela ou gráfico.</p>
+      <div class="routine-grid">
+        <div class="routine-step"><strong>1. Tema</strong><br>Que matéria é?</div>
+        <div class="routine-step"><strong>2. Unidade</strong><br>Percentagem, euros, índice?</div>
+        <div class="routine-step"><strong>3. Tempo</strong><br>Que anos compara?</div>
+        <div class="routine-step"><strong>4. Seta</strong><br>Se isto sobe, aquilo faz o quê?</div>
+        <div class="routine-step"><strong>5. Linguagem</strong><br>Usa termos económicos.</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell">
+      Feito para o Pedro estudar Economia A com menos ansiedade, mais clareza e mais treino ativo. ✨
+    </div>
+  </footer>
+
+  <script>
+    const concepts = [...document.querySelectorAll('.concept')];
+    const expandAll = document.getElementById('expandAll');
+    const collapseAll = document.getElementById('collapseAll');
+    const searchInput = document.getElementById('searchInput');
+    const clearSearch = document.getElementById('clearSearch');
+    const progressText = document.getElementById('progressText');
+    const scoreRing = document.getElementById('scoreRing');
+    const checklist = document.getElementById('masterChecklist');
+
+    function setConceptOpen(card, isOpen) {
+      card.classList.toggle('open', isOpen);
+      const toggle = card.querySelector('.toggle');
+      if (toggle) toggle.textContent = isOpen ? '−' : '+';
+    }
+
+    concepts.forEach(card => {
+      card.querySelector('.concept-header').addEventListener('click', () => {
+        setConceptOpen(card, !card.classList.contains('open'));
+      });
+    });
+
+    expandAll.addEventListener('click', () => concepts.forEach(c => setConceptOpen(c, true)));
+    collapseAll.addEventListener('click', () => concepts.forEach(c => setConceptOpen(c, false)));
+
+    const masterItems = [
+      ['problema', 'Escassez e custo de oportunidade'],
+      ['consumo', 'Tipos de consumo'],
+      ['procuraoferta', 'Procura, oferta e equilíbrio'],
+      ['inflacao', 'Inflação e poder de compra'],
+      ['trabalho', 'Mercado de trabalho'],
+      ['ue', 'Integração europeia']
+    ];
+
+    masterItems.forEach(([id, label]) => {
+      const item = document.createElement('label');
+      item.innerHTML = `<input type="checkbox" data-master="${id}"> <span>${label}</span>`;
+      checklist.appendChild(item);
+    });
+
+    function updateProgress() {
+      const checks = [...checklist.querySelectorAll('input')];
+      const done = checks.filter(c => c.checked).length;
+      const pct = Math.round((done / checks.length) * 100);
+      progressText.textContent = pct + '%';
+      scoreRing.style.setProperty('--progress', pct + '%');
+      localStorage.setItem('ecoPedroProgress', JSON.stringify(checks.map(c => c.checked)));
+    }
+
+    const saved = JSON.parse(localStorage.getItem('ecoPedroProgress') || 'null');
+    if (saved) {
+      [...checklist.querySelectorAll('input')].forEach((c, i) => c.checked = !!saved[i]);
+    }
+    checklist.addEventListener('change', updateProgress);
+    updateProgress();
+
+    function filterConcepts(query) {
+      const q = query.trim().toLowerCase();
+      concepts.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        const tags = (card.dataset.tags || '').toLowerCase();
+        const show = !q || text.includes(q) || tags.includes(q);
+        card.classList.toggle('hidden', !show);
+        if (q && show) setConceptOpen(card, true);
+      });
+    }
+
+    searchInput.addEventListener('input', () => filterConcepts(searchInput.value));
+    clearSearch.addEventListener('click', () => {
+      searchInput.value = '';
+      document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+      filterConcepts('');
+    });
+
+    document.querySelectorAll('.chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        searchInput.value = chip.dataset.filter;
+        filterConcepts(chip.dataset.filter);
+      });
+    });
+
+    document.querySelectorAll('.quiz-card').forEach(card => {
+      const answer = card.dataset.answer;
+      const feedback = card.querySelector('.feedback');
+      card.querySelectorAll('.option').forEach(btn => {
+        btn.addEventListener('click', () => {
+          card.querySelectorAll('.option').forEach(b => b.classList.remove('correct', 'wrong'));
+          if (btn.dataset.option === answer) {
+            btn.classList.add('correct');
+            feedback.textContent = 'Certo. Boa! Repara na regra por trás da resposta e tenta dizê-la por palavras tuas.';
+          } else {
+            btn.classList.add('wrong');
+            card.querySelector(`.option[data-option="${answer}"]`).classList.add('correct');
+            feedback.textContent = 'Quase. A resposta correta está marcada. Lê a explicação mental: qual é a seta de causa e efeito?';
+          }
+        });
+      });
+    });
+
+    document.querySelectorAll('.flashcard').forEach(card => {
+      card.addEventListener('click', () => card.classList.toggle('flipped'));
+    });
+  </script>
+</body>
+</html>
